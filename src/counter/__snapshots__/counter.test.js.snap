@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter tests renders correctly 1`] = `
+<div>
+  <h2>
+    Counter: 
+    1
+  </h2>
+  <button
+    onClick={[Function]}
+  >
+    INC
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    DEC
+  </button>
+</div>
+`;
