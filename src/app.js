@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link, Route, Switch} from "react-router-dom";
+import { hot } from 'react-hot-loader';
 
 import Counter from "./counter/counter";
 
-export default class App extends React.Component {
+export class App extends React.Component {
     render() {
         return (
             <div>
@@ -23,3 +24,5 @@ export default class App extends React.Component {
         );
     }
 }
+
+export default hot(module)(App);
