@@ -13,7 +13,6 @@ export class Counter extends React.Component {
     render() {
         return (
             <div>
-                <h1>Test</h1>
                 <h2>Counter: {this.props.counter}</h2>
                 <button onClick={this.props.actions.increment}>INC</button>
                 <button onClick={this.props.actions.decrement}>DEC</button>
