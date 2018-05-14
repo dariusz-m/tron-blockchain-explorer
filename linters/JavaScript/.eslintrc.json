@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "jquery": true
+        "jquery": true,
+        "es6": true
     },
     "extends": ["eslint:recommended", "plugin:flowtype/recommended"],
     "parser": "babel-eslint",
@@ -21,7 +22,9 @@
         "module": true,
         "describe": true,
         "it": true,
-        "expect": true
+        "expect": true,
+        "jest": true,
+        "beforeEach": true
     },
     "rules": {
         "require-jsdoc": [0, {  //now is disable, set 2 to enable jsDoc
@@ -41,7 +44,7 @@
           2,
           "except-parens"
         ],                             // disallow assignment in conditional expressions
-        "no-console": 2,               // disallow use of console (off by default in the node environment)
+        "no-console": ["error", { "allow": ["error"] }], // disallow use of console (off by default in the node environment)
         "no-constant-condition": 0,    // disallow use of constant expressions in conditions
         "no-control-regex": 0,         // disallow control characters in regular expressions
         "no-debugger": 0,              // disallow use of debugger

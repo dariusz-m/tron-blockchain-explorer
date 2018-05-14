@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Block tests Renders correctly 1`] = `
+<div>
+  <h2>
+    Block
+  </h2>
+  <div>
+    <pre>
+      {
+  "number": 145518,
+  "witnessId": 0,
+  "hash": "831906F5AED9F8C27A02AFC283BE3F5D3977C7F3D3253EB6BE448373C0708382",
+  "parentHash": "000000000002386D3AADF9A5E5C34D0DFE007E4D4184788CECDF05DBDBCF1CF2"
+}
+    </pre>
+  </div>
+</div>
+`;

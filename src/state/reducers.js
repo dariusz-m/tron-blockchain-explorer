@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import counterReducer from '../counter/counter.reducer';
+import tokensReducer from '../tokens/tokens.reducer';
+import selectedBlockReducer from '../block/block.reducer';
 
 export default combineReducers({
     router: routerReducer,
-    counter: counterReducer
+    tokens: tokensReducer,
+    selectedBlock: selectedBlockReducer,
 });
