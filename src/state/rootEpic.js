@@ -1,7 +1,9 @@
 import { combineEpics } from 'redux-observable';
 
-import {increment} from '../counter/counter.epics';
+import {loadTokens} from '../tokens/tokens.epics';
+import {loadBlock} from '../block/block.epics';
 
 export const rootEpic = combineEpics(
-    increment
+    loadTokens,
+    loadBlock
 );

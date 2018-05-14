@@ -15,6 +15,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
@@ -40,7 +41,6 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
-    "@reactivex/rxjs": "^6.1.0",
     "@tronprotocol/wallet-api": "^0.0.35",
     "history": "^4.7.2",
     "prop-types": "^15.6.1",
@@ -52,6 +52,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
-    "redux-observable": "^0.18.0"
+    "redux-observable": "1.0.0-alpha.2",
+    "rxjs": "^6.1.0"
   }
 }

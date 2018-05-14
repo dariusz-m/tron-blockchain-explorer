@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tokens tests Renders correctly with tokens 1`] = `
+<div>
+  <h1>
+    Tokens
+  </h1>
+  <div>
+    Feefree
+  </div>
+  <div>
+    BABA
+  </div>
+</div>
+`;
+
+exports[`Tokens tests Renders correctly without tokens 1`] = `
+<div>
+  <h1>
+    Tokens
+  </h1>
+</div>
+`;
