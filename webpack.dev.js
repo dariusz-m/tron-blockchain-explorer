@@ -37,6 +37,7 @@ module.exports = merge(common, {
     ],
     output: {
         filename: '[name].bundle.[hash].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: "/"
     }
 });

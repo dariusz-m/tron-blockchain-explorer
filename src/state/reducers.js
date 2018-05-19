@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import tokensReducer from '../tokens/tokens.reducer';
-import selectedBlockReducer from '../block/block.reducer';
+import searchEngineReducer from '../search/search.reducer';
+import blockSummaryReducer from '../block/block.reducer';
+import accountSummaryReducer from '../account-summary/account-summary.reducer';
 
 export default combineReducers({
     router: routerReducer,
-    tokens: tokensReducer,
-    selectedBlock: selectedBlockReducer,
+    searchEngine: searchEngineReducer,
+    blockSummary: blockSummaryReducer,
+    accountSummary: accountSummaryReducer,
 });

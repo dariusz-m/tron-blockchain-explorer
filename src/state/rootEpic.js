@@ -1,9 +1,13 @@
 import { combineEpics } from 'redux-observable';
 
-import {loadTokens} from '../tokens/tokens.epics';
-import {loadBlock} from '../block/block.epics';
+import {loadBlock, loadTransactionsByBlock} from '../block/block.epics';
+import {search} from '../search/search.epics';
+import {loadTransactionsByAccount, loadAccountDetails} from '../account-summary/account-summary.epics';
 
 export const rootEpic = combineEpics(
-    loadTokens,
-    loadBlock
+    loadBlock,
+    search,
+    loadTransactionsByAccount,
+    loadAccountDetails,
+    loadTransactionsByBlock
 );

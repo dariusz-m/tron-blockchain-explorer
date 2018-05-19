@@ -2,35 +2,29 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import nock from 'nock';
 
-import {Block} from "./block.component";
 import configureStore from "../state";
-import {loadBlock, loadTransactionsByBlock} from "./block.actions";
 import initialState from "../state/initialState";
 import {DATA_LOADING_STATUS} from "../data-loading-status";
+import {AccountSummary} from "./account-summary.component";
+import {loadAccountDetails, loadTransactionsByAccount} from "./account-summary.actions";
 import {TRON_ORGIN} from "../config/tron-api.config";
 
 jest.mock('react-list', () => 'div');
 
 
-describe('Block tests', () => {
+describe('Account summary tests', () => {
     let store;
-    let block = {};
+    let accountDetails = {};
     let transactions = [];
 
     beforeEach(() => {
         store = configureStore();
-        block = {
-            number: 11,
-            hash: "88dc76d2e76872190edaa55c1d024c321c49b077224c0c5d5dbfd89da165a3a9",
-            size: 172,
-            timestamp: 1526652720000,
-            txTrieRoot: "11111111111111111111111111111111273Yts",
-            parentHash: "000000000000000ae49bf11781254f84f20e88ca281dc919a999892cac0e7d98",
-            witnessId: 0,
-            witnessAddress: "27mAGvEWMHdiEg3xPyQXJZiPko4E7DaNyNW",
-            nrOfTrx: 0,
+        accountDetails = {
+            address: "27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS",
+            balance: 41935732000000000,
+            name: "Devaccount",
+            tokenBalances: {Evan: 88999}
         };
-
         transactions = [
             {
                 hash: "532c288aab0b5a8355e5baaef8c77891b4a9ef1feaf44202ce2ddfff54903930",
@@ -55,42 +49,40 @@ describe('Block tests', () => {
 
     it('Renders correctly', () => {
         const actions = {
-            loadBlock: jest.fn(),
-            loadTransactionsByBlock: jest.fn(),
+            loadTransactions: jest.fn(),
+            loadAccountDetails: jest.fn(),
         };
+        const match = {params: {address: 1}};
 
         const tree = renderer.create(
-            <Block
+            <AccountSummary
                 actions={actions}
-                selectedBlock={block}
                 transactions={transactions}
+                account={accountDetails}
                 statusOfDataLoading={DATA_LOADING_STATUS.DATA_HAVE_BEEN_LOADED}
+                match={match}
             />
         ).toJSON();
 
         expect(tree).toMatchSnapshot();
     });
 
-    it('Block has been loaded', (done) => {
+    it('Account details has been loaded', (done) => {
         expect.hasAssertions();
         nock(TRON_ORGIN)
             .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-            .get(`/api/block?sort=-number&limit=1&number=${block.number}`)
-            .reply(200, {data: [block]});
-        nock(TRON_ORGIN)
-            .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-            .get(`/api/block?sort=-number&limit=1&hash=${block.number}`)
-            .reply(200, {data: [block]});
+            .get(`/api/account?sort=-balance&limit=1&address=${accountDetails.address}`)
+            .reply(200, {data: [accountDetails]});
         const expectedState = {
             ...initialState,
-            blockSummary: {
-                ...initialState.blockSummary,
+            accountSummary: {
+                ...initialState.accountSummary,
                 statusOfDataLoading: DATA_LOADING_STATUS.DATA_HAVE_BEEN_LOADED,
-                block
+                account: accountDetails
             }
         };
 
-        store.dispatch(loadBlock(block.number));
+        store.dispatch(loadAccountDetails(accountDetails.address));
 
         store.subscribe(() => {
             expect(store.getState()).toEqual(expectedState);
@@ -98,21 +90,21 @@ describe('Block tests', () => {
         });
     });
 
-    it('Transactions for block have been loaded', (done) => {
+    it('Transactions for account have been loaded', (done) => {
         expect.hasAssertions();
         nock(TRON_ORGIN)
             .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-            .get(`/api/transaction?sort=-timestamp&limit=100&start=0&block=${block.number}`)
+            .get(`/api/transaction?sort=-timestamp&address=${accountDetails.address}`)
             .reply(200, {data: [...transactions]});
         const expectedState = {
             ...initialState,
-            blockSummary: {
-                ...initialState.blockSummary,
+            accountSummary: {
+                ...initialState.accountSummary,
                 transactions: [...transactions]
             }
         };
 
-        store.dispatch(loadTransactionsByBlock(block.number));
+        store.dispatch(loadTransactionsByAccount(accountDetails.address));
 
         store.subscribe(() => {
             expect(store.getState()).toEqual(expectedState);

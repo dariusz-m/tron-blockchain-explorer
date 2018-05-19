@@ -24,22 +24,16 @@ module.exports = merge(common, {
     ],
     output: {
         filename: '[name].bundle.[chunkhash].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: "/"
     },
     optimization: {
         splitChunks: {
             cacheGroups: {
-                tronprotocol: {
-                    test: /@tronprotocol\/wallet-api/,
-                    name: "tronprotocol",
-                    chunks: "all",
-                    enforce: true,
-                },
                 vendors: {
                     test: /node_modules/,
                     name: "vendors",
                     chunks: "all",
-                    priority: -10
                 },
             }
         }

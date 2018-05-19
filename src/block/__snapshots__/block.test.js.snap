@@ -8,12 +8,33 @@ exports[`Block tests Renders correctly 1`] = `
   <div>
     <pre>
       {
-  "number": 145518,
+  "number": 11,
+  "hash": "88dc76d2e76872190edaa55c1d024c321c49b077224c0c5d5dbfd89da165a3a9",
+  "size": 172,
+  "timestamp": 1526652720000,
+  "txTrieRoot": "11111111111111111111111111111111273Yts",
+  "parentHash": "000000000000000ae49bf11781254f84f20e88ca281dc919a999892cac0e7d98",
   "witnessId": 0,
-  "hash": "831906F5AED9F8C27A02AFC283BE3F5D3977C7F3D3253EB6BE448373C0708382",
-  "parentHash": "000000000002386D3AADF9A5E5C34D0DFE007E4D4184788CECDF05DBDBCF1CF2"
+  "witnessAddress": "27mAGvEWMHdiEg3xPyQXJZiPko4E7DaNyNW",
+  "nrOfTrx": 0
 }
     </pre>
+  </div>
+  <h2>
+    Transactions
+  </h2>
+  <div
+    style={
+      Object {
+        "maxHeight": 200,
+        "overflow": "auto",
+      }
+    }
+  >
+    <div
+      itemRenderer={[Function]}
+      length={2}
+    />
   </div>
 </div>
 `;
