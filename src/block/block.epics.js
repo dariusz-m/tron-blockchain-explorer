@@ -1,5 +1,5 @@
 import { from, of, merge } from 'rxjs';
-import { mergeMap, map, catchError, pluck} from 'rxjs/operators';
+import { mergeMap, map, catchError, pluck, delay, filter} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 
 import {
@@ -9,7 +9,6 @@ import {
     transactionsByBlockHaveBeenLoaded, transactionsByBlockHaveNotBeenLoaded
 } from './block.actions';
 import {makeRequest, TYPE_OF_REQUESTS} from "../search/search.epics";
-import {filter} from "rxjs/operators/index";
 import {TRON_ORGIN} from "../config/tron-api.config";
 
 export const loadBlock = action$ => {
@@ -32,6 +31,7 @@ export const loadBlock = action$ => {
                     return of(blockHasNotBeenLoaded());
                 }),
             )),
+            delay(1000)
         );
 };
 
@@ -50,4 +50,5 @@ export const loadTransactionsByBlock = action$ =>
                     })
                 )
             ),
+            delay(2000)
         );

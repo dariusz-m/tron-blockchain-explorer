@@ -1,29 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Account summary tests Renders correctly 1`] = `
-<div>
-  <h1>
-    Account
-  </h1>
-  <p>
-    27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS
-  </p>
-  <p>
-    41935732000000000
-  </p>
-  <p>
-    Devaccount
-  </p>
-  <div>
-    <p>
-      Evan
-      : 
-      88999
-    </p>
+<div
+  className="results visible"
+>
+  <div
+    className="main-block"
+  >
+    <h3
+      className="data-piece loading loaded"
+      id="h3-main"
+    >
+      Account
+    </h3>
+    <span
+      className="data-piece loading loaded"
+      id="search-result"
+    >
+      27d3byPxZXKQWfXX7sJvemJJuv5M65F3vjS
+    </span>
+    <a
+      className="data-piece loading loaded balance"
+      id="data-main"
+    >
+      41935732000
+       TRX
+    </a>
+    <h3
+      className="data-piece loading loaded"
+      id="h3-secondary"
+    >
+      Recent transactions
+    </h3>
   </div>
-  <h2>
-    Transactions
-  </h2>
   <div
     style={
       Object {

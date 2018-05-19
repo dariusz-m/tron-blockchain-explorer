@@ -1,5 +1,5 @@
 import { from, of } from 'rxjs';
-import { mergeMap, map, catchError, pluck} from 'rxjs/operators';
+import { mergeMap, map, catchError, pluck, delay} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 
 import {
@@ -26,6 +26,7 @@ export const loadTransactionsByAccount = action$ =>
                     })
                 )
             ),
+            delay(1000)
         );
 
 export const loadAccountDetails = action$ =>
@@ -43,5 +44,6 @@ export const loadAccountDetails = action$ =>
                     })
                 )
             ),
+            delay(2000)
         );
 

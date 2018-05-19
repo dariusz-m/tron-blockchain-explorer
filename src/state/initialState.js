@@ -13,7 +13,7 @@ const initialState = {
             number: 0,
             parentHash: "",
             size: 0,
-            timestamp: 0,
+            timestamp: 1,
             txTrieRoot: "",
             witnessAddress: "",
             witnessId: 0

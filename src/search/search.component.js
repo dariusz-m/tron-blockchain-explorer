@@ -31,21 +31,23 @@ export class Search extends React.Component {
     }
 
     render() {
+        const btnLoweredClassName = this.state.value.length > 0? "btn-lowered" : "";
         return (
             <div className="wrapper-search">
                 <a className="logo"/>
                 <form className="search-widget" onSubmit={this.search}>
-                    <input className="search-bar"
-                           id="search-bar"
-                           placeholder="Transaction, block, account, token..."
-                           autoFocus
-                           type="text"
-                           value={this.state.value}
-                           onChange={this.onChange}
+                    <input
+                        className="search-bar"
+                        id="search-bar"
+                        placeholder="Transaction, block, account, token..."
+                        autoFocus
+                        type="text"
+                        value={this.state.value}
+                        onChange={this.onChange}
                     />
-                        <a className="btn search" id="btn-search" onClick={this.search}>
-                            &nbsp;
-                        </a>
+                    <a className={`btn search ${btnLoweredClassName}`} id="btn-search" onClick={this.search}>
+                        &nbsp;
+                    </a>
                 </form>
             </div>
         );

@@ -108,6 +108,7 @@ describe('Block tests', () => {
             ...initialState,
             blockSummary: {
                 ...initialState.blockSummary,
+                statusOfDataLoading: DATA_LOADING_STATUS.DATA_HAVE_BEEN_LOADED,
                 transactions: [...transactions]
             }
         };
