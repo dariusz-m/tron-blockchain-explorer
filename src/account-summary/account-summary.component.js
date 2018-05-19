@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import ReactList from 'react-list';
 
-import {loadBlock, loadTransactionsByBlock} from "./block.actions";
+import {loadAccountDetails, loadTransactionsByAccount} from './account-summary.actions';
 import {DATA_LOADING_STATUS} from "../data-loading-status";
 
-export class Block extends React.Component {
+export class AccountSummary extends React.Component {
     constructor() {
         super();
         this.renderTransaction = this.renderTransaction.bind(this);
@@ -15,9 +15,9 @@ export class Block extends React.Component {
 
     componentDidMount() {
         if(this.props.statusOfDataLoading === DATA_LOADING_STATUS.DATA_HAVE_NOT_BEEN_LOADED) {
-            this.props.actions.loadBlock(this.props.match.params.searchTerm);
+            this.props.actions.loadAccountDetails(this.props.match.params.address);
         }
-        this.props.actions.loadTransactionsByBlock(this.props.selectedBlock.number);
+        this.props.actions.loadTransactions(this.props.match.params.address);
     }
 
     renderTransaction(index, key) {
@@ -37,9 +37,16 @@ export class Block extends React.Component {
     render() {
         return (
             <div>
-                <h2>Block</h2>
-                <div><pre>{JSON.stringify(this.props.selectedBlock, null, 2) }</pre></div>
+                <h1>Account</h1>
+                <p>{this.props.account.address}</p>
+                <p>{this.props.account.balance}</p>
+                <p>{this.props.account.name}</p>
+                <div>
 
+                    {Object.keys(this.props.account.tokenBalances).map((tokenName) => {
+                        return <p key={tokenName}>{tokenName}: {this.props.account.tokenBalances[tokenName]}</p>;
+                    })}
+                </div>
                 <h2>Transactions</h2>
                 <div style={{overflow: 'auto', maxHeight: 200}}>
                     <ReactList
@@ -52,17 +59,13 @@ export class Block extends React.Component {
     }
 }
 
-Block.propTypes = {
-    selectedBlock: PropTypes.shape({
-        hash: PropTypes.string.isRequired,
-        nrOfTrx: PropTypes.number.isRequired,
-        number: PropTypes.number.isRequired,
-        parentHash: PropTypes.string.isRequired,
-        size: PropTypes.number.isRequired,
-        timestamp: PropTypes.number.isRequired,
-        txTrieRoot: PropTypes.string.isRequired,
-        witnessAddress: PropTypes.string.isRequired,
-        witnessId: PropTypes.number.isRequired
+AccountSummary.propTypes = {
+    account: PropTypes.shape({
+        address: PropTypes.string.isRequired,
+        balance: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        /* e.g {"Shasta": 1024, "By A Nose": 5300, "Head Coin": 1301}*/
+        tokenBalances: PropTypes.object.isRequired,
     }).isRequired,
     transactions: PropTypes.arrayOf(PropTypes.shape({
         amount: PropTypes.number.isRequired,
@@ -75,26 +78,26 @@ Block.propTypes = {
     })).isRequired,
     statusOfDataLoading: PropTypes.string.isRequired,
     actions: PropTypes.shape({
-        loadBlock: PropTypes.func.isRequired,
-        loadTransactionsByBlock: PropTypes.func.isRequired,
+        loadTransactions: PropTypes.func.isRequired,
+        loadAccountDetails: PropTypes.func.isRequired,
     }),
 };
 
 function mapStateToProps(state) {
     return {
-        selectedBlock: state.blockSummary.block,
-        transactions: state.blockSummary.transactions,
-        statusOfDataLoading: state.blockSummary.statusOfDataLoading,
+        account: state.accountSummary.account,
+        transactions: state.accountSummary.transactions,
+        statusOfDataLoading: state.accountSummary.statusOfDataLoading,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({
-            loadBlock: loadBlock,
-            loadTransactionsByBlock: loadTransactionsByBlock,
+            loadTransactions: loadTransactionsByAccount,
+            loadAccountDetails: loadAccountDetails,
         }, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Block);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountSummary);

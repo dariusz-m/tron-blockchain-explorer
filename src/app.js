@@ -1,9 +1,10 @@
 import React from 'react';
-import {Link, Route, Switch} from "react-router-dom";
+import {Link, Switch, Route, Redirect} from "react-router-dom";
 import { hot } from 'react-hot-loader';
 
-import Tokens from "./tokens/tokens.component";
 import Block from "./block/block.component";
+import Search from "./search/search.component";
+import AccountSummary from "./account-summary/account-summary.component";
 
 export class App extends React.Component {
     render() {
@@ -11,13 +12,13 @@ export class App extends React.Component {
             <div>
                 <div>
                     <Link to="/">Home</Link><br/>
-                    <Link to="/tokens">Tokens</Link><br/>
-                    <Link to="/last-block">Last block</Link><br/>
                 </div>
+                <Search/>
                 <Switch>
                     <Route exact path="/" component={() => <h1>Home</h1>}/>
-                    <Route path="/tokens" component={Tokens}/>
-                    <Route path="/last-block" component={Block}/>
+                    <Route path="/account/:address" component={AccountSummary}/>
+                    <Route path="/block/:searchTerm" component={Block}/>
+                    <Redirect to="/"/>
                 </Switch>
             </div>
         );

@@ -8,12 +8,12 @@ import reducers from './reducers';
 import { rootEpic } from './rootEpic';
 import initialState from "./initialState";
 
-const composeEnhancers = composeWithDevTools({});
-const epicMiddleware = createEpicMiddleware(rootEpic);
-
 export const history = createHistory();
-const historyMiddleware = routerMiddleware(history);
 
 export default function configureStore() {
+    const composeEnhancers = composeWithDevTools({});
+    const epicMiddleware = createEpicMiddleware(rootEpic);
+    const historyMiddleware = routerMiddleware(history);
+
     return createStore(reducers, initialState, composeEnhancers(applyMiddleware(epicMiddleware, historyMiddleware)));
 }
