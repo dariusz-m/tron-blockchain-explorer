@@ -9,13 +9,10 @@ import AccountSummary from "./account-summary/account-summary.component";
 export class App extends React.Component {
     render() {
         return (
-            <div>
-                <div>
-                    <Link to="/">Home</Link><br/>
-                </div>
+            <div className="inner-container">
                 <Search/>
                 <Switch>
-                    <Route exact path="/" component={() => <h1>Home</h1>}/>
+                    <Route exact path="/" component={() => <div/>}/>
                     <Route path="/account/:address" component={AccountSummary}/>
                     <Route path="/block/:searchTerm" component={Block}/>
                     <Redirect to="/"/>
