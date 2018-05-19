@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import ReactList from 'react-list';
+import TimeAgo from 'react-timeago'
 
 import {loadAccountDetails, loadTransactionsByAccount} from './account-summary.actions';
 import {DATA_LOADING_STATUS} from "../data-loading-status";
@@ -11,6 +12,7 @@ export class AccountSummary extends React.Component {
     constructor() {
         super();
         this.renderTransaction = this.renderTransaction.bind(this);
+        this.goToTransactionDetails = this.goToTransactionDetails.bind(this);
     }
 
     componentDidMount() {
@@ -20,73 +22,57 @@ export class AccountSummary extends React.Component {
         this.props.actions.loadTransactions(this.props.match.params.address);
     }
 
-    renderTransaction(index, key) {
-        return (
-            <div key={key}>
-                <p>{this.props.transactions[index].amount}</p>
-                <p>{this.props.transactions[index].block}</p>
-                <p>{this.props.transactions[index].hash}</p>
-                <p>{this.props.transactions[index].timestamp}</p>
-                <p>{this.props.transactions[index].tokenName}</p>
-                <p>{this.props.transactions[index].transferFromAddress}</p>
-                <p>{this.props.transactions[index].transferToAddress}</p>
-            </div>
-        );
+    goToTransactionDetails() {
+        event.preventDefault();
+        event.stopPropagation();
     }
 
-    // render() {
-    //     return (
-    //         <div>
-    //             <h1>Account</h1>
-    //             <p>{this.props.account.address}</p>
-    //             <p>{this.props.account.balance}</p>
-    //             <p>{this.props.account.name}</p>
-    //             <div>
-    //
-    //                 {Object.keys(this.props.account.tokenBalances).map((tokenName) => {
-    //                     return <p key={tokenName}>{tokenName}: {this.props.account.tokenBalances[tokenName]}</p>;
-    //                 })}
-    //             </div>
-    //             <h2>Transactions</h2>
-    //             <div style={{overflow: 'auto', maxHeight: 200}}>
-    //                 <ReactList
-    //                     itemRenderer={this.renderTransaction}
-    //                     length={this.props.transactions.length}
-    //                 />
-    //             </div>
-    //         </div>
-    //     );
-    // }
-
-
-    render() {
+    renderTransaction(index, key) {
         return (
-            <div className="results visible">
-                <div className="main-block">
-                    <h3 className="data-piece loading loaded" id="h3-main">Account</h3>
-                    <span className="data-piece loading loaded" id="search-result">27jXY5ZL6qWYFn4qNSda4H4sUu5zURb5sC3</span>
-                    <a className="data-piece loading loaded balance" id="data-main">280 037 TRX</a>
-                    <h3 className="data-piece loading loaded" id="h3-secondary">Recent transactions</h3>
-                </div>
-                <div className="result-block">
+                <div key={key} className="result-block">
                     <div className="data-piece loading loaded">
-                        <span className="balance result-title">1 043 trx</span>
-                        <span className="result-title-side">5 minutes ago</span>
+                        <span className="balance result-title">
+                            {this.props.transactions[index].amount/6} {this.props.transactions[index].tokenName}
+                        </span>
+                        <span className="result-title-side">
+                            <TimeAgo date={this.props.transactions[index].timestamp}/>
+                        </span>
                     </div>
 
                     <div className="data-piece loading loaded">
                         <span className="icon flow to" id="icon-direction"/>
-                        <a className="link result-attr-2" href=""> 27jXY5ZL6qWYFn4qNSda4H4sUu5zURb5sC3</a>
+                        <a className="link result-attr-2"> 27jXY5ZL6qWYFn4qNSda4H4sUu5zURb5sC3</a>
                         <span className="icon href"/>
                     </div>
 
                     <div className="data-piece loading loaded">
-                        <a className="link result-attr-3 truncate" href="">
+                        <a className="link result-attr-3 truncate" onClick={this.goToTransactionDetails}>
                             <span className="icon hashtag"/>
-                            7d0d77b9b5509c1a232401db1a74f09cc93e29f8575a1ee0e421beba9d4cb5da
+                            {this.props.transactions[index].hash}
                         </a>
                         <span className="icon href"/>
                     </div>
+                </div>
+
+        )
+    }
+
+
+    render() {
+        const balance = this.props.account.balance;
+        return (
+            <div className="results visible">
+                <div className="main-block">
+                    <h3 className="data-piece loading loaded" id="h3-main">Account</h3>
+                    <span className="data-piece loading loaded" id="search-result">{this.props.account.address}</span>
+                    <a className="data-piece loading loaded balance" id="data-main">{balance} TRX</a>
+                    <h3 className="data-piece loading loaded" id="h3-secondary">Recent transactions</h3>
+                </div>
+                <div style={{overflow: 'auto', maxHeight: 200}}>
+                    <ReactList
+                        itemRenderer={this.renderTransaction}
+                        length={this.props.transactions.length}
+                    />
                 </div>
             </div>
         )
