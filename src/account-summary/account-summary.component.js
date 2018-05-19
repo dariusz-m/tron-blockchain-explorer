@@ -3,10 +3,12 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {bindActionCreators} from "redux";
 import ReactList from 'react-list';
-import TimeAgo from 'react-timeago'
+import TimeAgo from 'react-timeago';
+import NumberFormat from 'react-number-format';
 
 import {loadAccountDetails, loadTransactionsByAccount} from './account-summary.actions';
 import {DATA_LOADING_STATUS} from "../data-loading-status";
+import {TRON_TOKEN_NAME, TRX_PRECISION} from "../config/tron-api.config";
 
 export class AccountSummary extends React.Component {
     constructor() {
@@ -28,11 +30,19 @@ export class AccountSummary extends React.Component {
     }
 
     renderTransaction(index, key) {
+        const flowDirection = this.props.account.address === this.props.transactions[index].transferFromAddress?
+            {address: this.props.transactions[index].transferToAddress, directionClassName: 'to'}
+            : {address: this.props.transactions[index].transferFromAddress, directionClassName: 'from'};
+
+        const amount = this.props.transactions[index].tokenName === TRON_TOKEN_NAME?
+            this.props.transactions[index].amount/TRX_PRECISION: this.props.transactions[index].amount;
+
         return (
                 <div key={key} className="result-block">
                     <div className="data-piece loading loaded">
                         <span className="balance result-title">
-                            {this.props.transactions[index].amount/6} {this.props.transactions[index].tokenName}
+                            <NumberFormat value={amount} thousandSeparator={" "} displayType={'text'}/>
+                            &nbsp;{this.props.transactions[index].tokenName}
                         </span>
                         <span className="result-title-side">
                             <TimeAgo date={this.props.transactions[index].timestamp}/>
@@ -40,8 +50,8 @@ export class AccountSummary extends React.Component {
                     </div>
 
                     <div className="data-piece loading loaded">
-                        <span className="icon flow to" id="icon-direction"/>
-                        <a className="link result-attr-2"> 27jXY5ZL6qWYFn4qNSda4H4sUu5zURb5sC3</a>
+                        <span className={`icon flow ${flowDirection.directionClassName}`} id="icon-direction"/>
+                        <a className="link result-attr-2"> {flowDirection.address}</a>
                         <span className="icon href"/>
                     </div>
 
@@ -59,7 +69,7 @@ export class AccountSummary extends React.Component {
 
 
     render() {
-        const balance = this.props.account.balance;
+        const balance = this.props.account.balance/TRX_PRECISION;
         return (
             <div className="results visible">
                 <div className="main-block">
