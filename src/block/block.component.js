@@ -4,9 +4,11 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import ReactList from 'react-list';
 import TimeAgo from 'react-timeago'
+import NumberFormat from 'react-number-format';
 
 import {loadBlock, loadTransactionsByBlock} from "./block.actions";
 import {DATA_LOADING_STATUS} from "../data-loading-status";
+import {TRON_TOKEN_NAME, TRX_PRECISION} from "../config/tron-api.config";
 
 export class Block extends React.Component {
     constructor() {
@@ -28,11 +30,14 @@ export class Block extends React.Component {
     }
 
     renderTransaction(index, key) {
+        const amount = this.props.transactions[index].tokenName === TRON_TOKEN_NAME?
+            this.props.transactions[index].amount/TRX_PRECISION: this.props.transactions[index].amount;
         return (
             <div key={key} className="result-block">
                 <div className="data-piece loading loaded">
                     <span className="balance result-title">
-                        {this.props.transactions[index].amount} {this.props.transactions[index].tokenName}
+                        <NumberFormat value={amount} thousandSeparator={" "} displayType={'text'}/>
+                         &nbsp;{this.props.transactions[index].tokenName}
                     </span>
                 </div>
 
