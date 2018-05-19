@@ -1,28 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Block tests Renders correctly 1`] = `
-<div>
-  <h2>
-    Block
-  </h2>
-  <div>
-    <pre>
-      {
-  "number": 11,
-  "hash": "88dc76d2e76872190edaa55c1d024c321c49b077224c0c5d5dbfd89da165a3a9",
-  "size": 172,
-  "timestamp": 1526652720000,
-  "txTrieRoot": "11111111111111111111111111111111273Yts",
-  "parentHash": "000000000000000ae49bf11781254f84f20e88ca281dc919a999892cac0e7d98",
-  "witnessId": 0,
-  "witnessAddress": "27mAGvEWMHdiEg3xPyQXJZiPko4E7DaNyNW",
-  "nrOfTrx": 0
-}
-    </pre>
+<div
+  className="results visible"
+>
+  <div
+    className="main-block"
+  >
+    <h3
+      className="data-piece loading loaded"
+      id="h3-main"
+    >
+      BLOCK HEIGHT
+    </h3>
+    <span
+      className="data-piece loading loaded"
+      id="search-result"
+    >
+      11
+    </span>
+    <a
+      className="data-piece loading loaded balance"
+      id="data-main"
+    >
+      <time
+        dateTime="2018-05-18T14:12:00.000Z"
+        title="2018-05-18 14:12"
+      >
+        1 day ago
+      </time>
+    </a>
+    <span
+      className="data-piece loading loaded result-block-hash"
+    >
+      # 
+      88dc76d2e76872190edaa55c1d024c321c49b077224c0c5d5dbfd89da165a3a9
+    </span>
+    <h3
+      className="data-piece loading loaded"
+      id="h3-secondary"
+    >
+      TRANSACTIONS
+    </h3>
   </div>
-  <h2>
-    Transactions
-  </h2>
   <div
     style={
       Object {
