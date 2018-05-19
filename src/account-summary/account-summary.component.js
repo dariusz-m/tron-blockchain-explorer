@@ -75,12 +75,6 @@ export class AccountSummary extends React.Component {
                     </div>
 
                     <div className="data-piece loading loaded">
-                        <a className="link result-attr-1" href=""> 27w8fusdksjYFn4qNSda4H4sUu5zURba321</a>
-                        <span className="icon href"/>
-                    </div>
-
-
-                    <div className="data-piece loading loaded">
                         <span className="icon flow to" id="icon-direction"/>
                         <a className="link result-attr-2" href=""> 27jXY5ZL6qWYFn4qNSda4H4sUu5zURb5sC3</a>
                         <span className="icon href"/>
