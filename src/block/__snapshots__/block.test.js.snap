@@ -27,13 +27,13 @@ exports[`Block tests Renders correctly 1`] = `
         dateTime="2018-05-18T14:12:00.000Z"
         title="2018-05-18 14:12"
       >
-        1 day ago
+        2 days ago
       </time>
     </a>
     <span
       className="data-piece loading loaded result-block-hash"
     >
-      # 
+      # 
       88dc76d2e76872190edaa55c1d024c321c49b077224c0c5d5dbfd89da165a3a9
     </span>
     <h3
@@ -44,16 +44,12 @@ exports[`Block tests Renders correctly 1`] = `
     </h3>
   </div>
   <div
-    style={
-      Object {
-        "maxHeight": 200,
-        "overflow": "auto",
-      }
-    }
+    className="scrollable-wrapper"
   >
     <div
       itemRenderer={[Function]}
       length={2}
+      pageSize={1}
     />
   </div>
 </div>

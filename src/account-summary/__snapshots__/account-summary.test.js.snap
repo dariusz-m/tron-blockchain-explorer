@@ -34,16 +34,12 @@ exports[`Account summary tests Renders correctly 1`] = `
     </h3>
   </div>
   <div
-    style={
-      Object {
-        "maxHeight": 200,
-        "overflow": "auto",
-      }
-    }
+    className="scrollable-wrapper"
   >
     <div
       itemRenderer={[Function]}
       length={2}
+      pageSize={1}
     />
   </div>
 </div>
