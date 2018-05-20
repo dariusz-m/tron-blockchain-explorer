@@ -68,7 +68,7 @@ export class AccountSummary extends React.Component {
                     <a className="data-piece loading loaded balance" id="data-main">{balance} TRX</a>
                     <h3 className="data-piece loading loaded" id="h3-secondary">Recent transactions</h3>
                 </div>
-                <div style={{overflow: 'auto', maxHeight: 200}}>
+                <div className="scrollable-wrapper">
                     <ReactList
                         itemRenderer={this.renderTransaction}
                         length={this.props.transactions.length}

@@ -74,7 +74,7 @@ export class Block extends React.Component {
                     </span>
                     <h3 className="data-piece loading loaded" id="h3-secondary">TRANSACTIONS</h3>
                 </div>
-                <div style={{overflow: 'auto', maxHeight: 200}}>
+                <div className="scrollable-wrapper">
                     <ReactList
                         itemRenderer={this.renderTransaction}
                         length={this.props.transactions.length}
