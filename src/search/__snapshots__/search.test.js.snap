@@ -1,20 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search tests Renders correctly 1`] = `
-<div>
+<div
+  className="wrapper-search"
+>
+  <a
+    className="logo"
+  />
   <form
-    className="search"
+    className="search-widget"
+    onSubmit={[Function]}
   >
     <input
+      autoFocus={true}
+      className="search-bar"
+      id="search-bar"
       onChange={[Function]}
+      placeholder="Transaction, block, account, token..."
       type="text"
       value=""
     />
-    <button
+    <a
+      className="btn search "
+      id="btn-search"
       onClick={[Function]}
     >
-      Search
-    </button>
+       
+    </a>
   </form>
 </div>
 `;
