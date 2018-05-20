@@ -70,7 +70,7 @@ export class Block extends React.Component {
                         <TimeAgo date={this.props.selectedBlock.timestamp}/>
                     </a>
                     <span className="data-piece loading loaded result-block-hash">
-                    # {this.props.selectedBlock.hash}
+                    #&nbsp;{this.props.selectedBlock.hash}
                     </span>
                     <h3 className="data-piece loading loaded" id="h3-secondary">TRANSACTIONS</h3>
                 </div>
