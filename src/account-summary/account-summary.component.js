@@ -87,6 +87,8 @@ export class AccountSummary extends React.Component {
                     <ReactList
                         itemRenderer={this.renderTransaction}
                         length={this.props.transactions.length}
+                        pageSize={1}
+                        scrollParentGetter={this.refs.parentScroll}
                     />
                 </div>
             </div>
